@@ -11,29 +11,28 @@
     </style>
 
     <div id="app">
-        <!-- Vue.js använder v- som kallas Directive -->
-        <!-- v-bind är så vanligt att det finns shorthand : -->
-        <!-- problemet med v-bind är att det är one way data bound -->
-        <!-- För two way data binding finns v-model direktivet! -->
-        <!-- v-show är ett direktiv för display:none toggle -->
-        <!-- v-if är ett direktiv för att skapa eller förstöra -->
-        <!-- v-else är motsatsrirektivet till v-if -->
-        <input type="email" v-if="visible" >
-        <!-- Ett problem är att p syns en stund innan vue tar bort de -->
-        <!-- Lösningen är att använda v-cloak -->
-        <p v-else v-cloak>Tack för att du fyllde i formuläret</p>
+        <input type="email" v-if="visible" v-model="email" > <!-- direktiv -->
+        <p v-else v-cloak>Tack för att du fyllde i formuläret</p> <!-- conditional -->
+        <!-- events med v.on:click, shorthand @click-->
+        <button @click="visaEmail">Submit</button>
     </div>
 </body>
 
-<!-- development version, includes helpful console warnings -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-    // Smart att spara hela Vue instansen i en variabel!
+   
     var vm = new Vue({
         el: '#app',
         data: { 
-            visible: true   // Kolla vm.visible i konsolen
-        } 
+            email: "email@.com", //2-way bound (form)
+            visible: true,   //vm.visible i konsolen
+            counter: 0
+        },
+        methods:{
+            visaEmail: function(){
+                alert("Din email är: " + this.email)
+            }
+        }
     });
 </script>
 
